@@ -3,6 +3,8 @@ package adventofcode2016;
 
 import java.util.function.BinaryOperator;
 
+import utils.MD5;
+
 public class Day17 {
 
     static int h = 0;
@@ -14,7 +16,7 @@ public class Day17 {
             return passcode;
         }
 
-        int hash[] = Utils.getMD5(passcode).chars().limit(4).map(c -> (c>'a' && c<='f') ? 1 : 0).toArray();
+        int hash[] = MD5.encode(passcode).chars().limit(4).map(c -> (c>'a' && c<='f') ? 1 : 0).toArray();
         h++;
         String path = passcode;
         if (y > 0 && hash[0] == 1) {

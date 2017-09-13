@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import utils.MD5;
+
 public class Day14 {
 
     static String id = "ihaygndm";
@@ -17,7 +19,7 @@ public class Day14 {
         }
         String s = id + x;
         for (int i=0; i<=2016; i++) {
-            s = Utils.getMD5(s);
+            s = MD5.encode(s);
         }
         cache.add(s);
         return s;
