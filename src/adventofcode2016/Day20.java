@@ -6,12 +6,14 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
+import utils.Input;
+
 public class Day20 {
 
     public static void main(String[] args) {
 
         // collect ranges from input
-        List<long[]> ranges = Utils.getStringsFromFile("input20.txt").stream()
+        List<long[]> ranges = new Input(2016, "input20.txt").strings().stream()
                 .map(s -> Arrays.stream(s.split("-")).mapToLong(Long::parseLong).toArray())
                 .collect(Collectors.toList());
 

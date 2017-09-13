@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import utils.Input;
+
 public class Day08 {
 
     static final int H = 6, W = 50;
@@ -13,7 +15,7 @@ public class Day08 {
 
 
     public static void main(String[] args) {
-        List<String> seq = Utils.getStringsFromFile("input08.txt");
+        List<String> seq = new Input(2016, "input08.txt").strings();
         seq.forEach(s -> {
             String parts[] = s.split(" ");
             if (parts[0].equals("rect")) {

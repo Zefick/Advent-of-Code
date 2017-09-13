@@ -1,6 +1,8 @@
 
 package adventofcode2016;
 
+import utils.Input;
+
 public class Day02 {
 
     static char[][] map = {
@@ -13,7 +15,7 @@ public class Day02 {
 
     public static void main(String[] args) {
         int p1[] = {2, 0};
-        for (String s : Utils.getStringsFromFile("input02.txt")) {
+        for (String s : new Input(2016, "input02.txt").strings()) {
             for (int c : s.toCharArray()) {
                 int p2[];
                 if (c == 'L')      p2 = new int[] {Math.max(0, p1[0]-1), p1[1]};

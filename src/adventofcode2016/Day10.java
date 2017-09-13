@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import utils.Input;
+
 public class Day10 {
 
     static class Bot {
@@ -41,7 +43,7 @@ public class Day10 {
         Pattern p1 = Pattern.compile("bot (\\d+) gives low to (\\w+) (\\d+) and high to (\\w+) (\\d+)");
         Pattern p2 = Pattern.compile("value (\\d+) goes to bot (\\d+)");
 
-        Utils.getStringsFromFile("input10.txt").forEach(s -> {
+        new Input(2016, "input10.txt").strings().forEach(s -> {
             Matcher m = p1.matcher(s);
             if (m.find()) {
                 int n = Integer.parseInt(m.group(1));

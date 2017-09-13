@@ -6,6 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import utils.Input;
+
 /**
  * The most tedious task. Let's fun with some OOP.
  */
@@ -83,7 +85,7 @@ public class Day21 {
             return rotate(s, -n);
         }
     }
-    
+
     static char[] rotate(char[] s, int n) {
         char s2[] = new char[s.length];
         for (int j=0; j<s.length; j++) {
@@ -190,7 +192,7 @@ public class Day21 {
     public static void main(String[] args) {
         char input[] = "fbgdceah".toCharArray();
 
-        List<Action> commands = Utils.getStringsFromFile("input21.txt").stream()
+        List<Action> commands = new Input(2016, "input21.txt").strings().stream()
                 .map(Day21::createAction)
                 .collect(Collectors.toList());
         Collections.reverse(commands);

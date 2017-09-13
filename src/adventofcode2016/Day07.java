@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import utils.Input;
+
 public class Day07 {
 
     static Pattern p1 = Pattern.compile("(\\w)(\\w)\\2\\1");
@@ -38,7 +40,7 @@ public class Day07 {
     }
 
     public static void main(String[] args) {
-        List<String> strings = Utils.getStringsFromFile("input07.txt");
+        List<String> strings = new Input(2016, "input07.txt").strings();
 
         System.out.println("Supports TLS: "
                 + strings.stream().filter(Day07::checkTLS).count());

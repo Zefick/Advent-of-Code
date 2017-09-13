@@ -4,12 +4,14 @@ package adventofcode2016;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import utils.Input;
+
 public class Day09 {
 
     static Pattern p = Pattern.compile("\\((\\d+)x(\\d+)\\)(.)");
 
     public static void main(String[] args) {
-        String input = Utils.getStringsFromFile("input09.txt").get(0);
+        String input = new Input(2016, "input09.txt").strings().get(0);
         System.out.println(decompress(input));
     }
 

@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import utils.Input;
+
 public class Day24 {
 
     static int map[][] = new int[42][];
@@ -40,7 +42,7 @@ public class Day24 {
     }
 
     public static void main(String[] args) {
-        List<String> data = Utils.getStringsFromFile("input24.txt");
+        List<String> data = new Input(2016, "input24.txt").strings();
 
         Point pts[] = new Point[8];
         int paths[][] = new int[8][8];

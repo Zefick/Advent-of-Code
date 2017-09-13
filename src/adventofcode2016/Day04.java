@@ -8,6 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import utils.Input;
+
 public class Day04 {
 
     // groups: 1 - room name, 2 - id, 3 - checksum
@@ -45,7 +47,7 @@ public class Day04 {
     }
 
     public static void main(String[] args) {
-        List<String> input = Utils.getStringsFromFile("input04.txt");
+        List<String> input = new Input(2016, "input04.txt").strings();
         System.out.println(input.stream().mapToInt(Day04::getID).sum());
     }
 
