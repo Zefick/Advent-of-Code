@@ -2,8 +2,10 @@
 package utils;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,21 +13,16 @@ public class Input {
 
     private final String path;
 
-    public Input(String path) {
-         this.path = path;
-    }
-
     public Input(int year, String file) {
-         this.path = "/adventofcode" + year + "/" + file;
-    }
-
-    private InputStream inputStream() {
-        return getClass().getResourceAsStream(path);
+        this.path = "input/" + year + "/" + file;
     }
 
     public List<String> strings() {
-        return new BufferedReader(new InputStreamReader(inputStream())).lines()
-                .collect(Collectors.toList());
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File(path)))) {
+            return reader.lines().collect(Collectors.toList());
+        } catch (IOException e) {
+            return Collections.emptyList();
+        }
     }
 
 }
