@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 import utils.Input;
 
-public class Day07 extends Main {
+public class Day07 {
 
     static Map<String, Object> gates = new HashMap<>();
 

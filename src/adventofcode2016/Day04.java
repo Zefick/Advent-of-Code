@@ -3,7 +3,7 @@ package adventofcode2016;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -27,28 +27,27 @@ public class Day04 {
                 .mapToObj(x -> String.valueOf((char)x))
                 .collect(Collectors.joining());
 
-        ToIntFunction<Integer> counter = c -> (int)name.chars().filter(x -> x == c).count();
+        ToLongFunction<Integer> counter = c -> name.chars().filter(x -> x == c).count();
 
         String checksum = name.chars()
                 .filter(Character::isAlphabetic)
                 .distinct().boxed()
-                .sorted(Comparator.comparingInt(counter).reversed()
+                .sorted(Comparator.comparingLong(counter).reversed()
                             .thenComparing(Comparator.naturalOrder())).limit(5)
-                .map(x -> ((Character)(char)(int)x).toString())
+                .map(x -> String.valueOf((char)(int)x))
                 .collect(Collectors.joining());
 
+        if (decripted.contains("northpole")) {
+            System.out.printf("%s %d%n", decripted, id);
+        }
+
         boolean isReal = checksum.equals(m.group(3));
-
-        // need manual search for string "northpole"
-        // other lines printed just for testing
-        System.out.printf(" %c %s %d%n", (isReal ? '+' : '-'), decripted, id);
-
         return isReal ? id : 0;
     }
 
     public static void main(String[] args) {
         List<String> input = new Input(2016, "input04.txt").strings();
-        System.out.println(input.stream().mapToInt(Day04::getID).sum());
+        System.out.println("Sum: " + input.stream().mapToInt(Day04::getID).sum());
     }
 
 }
