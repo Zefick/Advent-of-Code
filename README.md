@@ -1,6 +1,6 @@
 # Advent of Code
 
-Solutions for programming puzzles from the <a href='http://adventofcode.com/2015'>Advent of Code 2015</a>, <a href='http://adventofcode.com/2016'>2016</a> and <a href='http://adventofcode.com/2017'>2017</a>.
+Solutions for programming puzzles from the <a href='http://adventofcode.com/2015'>Advent of Code 2015</a>, <a href='http://adventofcode.com/2016'>2016</a>, <a href='http://adventofcode.com/2017'>2017</a> and <a href='http://adventofcode.com/2018'>2018</a>.
 
 Solving this puzzles I tried to find interesting solutions using only the base Java API, specifically streams. Sometimes I sacrificed optimality in return for beauty and compactness.
 
