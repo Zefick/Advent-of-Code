@@ -16,7 +16,7 @@ public class Day10 {
     static Pattern p = Pattern.compile("position=<\\s*(-?\\d+),\\s*(-?\\d+)> velocity=<\\s*(-?\\d+),\\s*(-?\\d+)>");
     
     public static void main(String[] args) {
-        List<String> input = new Input(2018, "input10.txt").strings();
+        List<String> input = new Input(2018, 10).strings();
         int[][] data = input.stream().map(s -> {
             Matcher m = p.matcher(s);
             m.find();
@@ -39,7 +39,7 @@ public class Day10 {
                     for (int j = -2; j < x2-x1+3; j++) {
                         int x = x1+j, y = y1+i;
                         boolean b = Arrays.stream(data).anyMatch(d -> d[0]==x && d[1]==y);
-                        System.out.print(b ? '#' : '.');
+                        System.out.print(b ? '#' : ' ');
                     }
                     System.out.println();
                 }

@@ -17,12 +17,22 @@ public class Input {
         this.path = "input/" + year + "/" + file;
     }
 
+    public Input(int year, int day) {
+        this.path = String.format("input/%d/input%02d.txt", year, day);
+    }
+
     public List<String> strings() {
         try (BufferedReader reader = new BufferedReader(new FileReader(new File(path)))) {
             return reader.lines().collect(Collectors.toList());
         } catch (IOException e) {
             return Collections.emptyList();
         }
+    }
+
+    public int[][] getMap() {
+        return strings().stream()
+                .map(s -> s.chars().toArray())
+                .toArray(int[][]::new);
     }
 
 }
