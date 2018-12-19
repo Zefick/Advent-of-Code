@@ -7,6 +7,9 @@ import java.util.regex.Pattern;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2016/day/7
+ */
 public class Day07 {
 
     static Pattern p1 = Pattern.compile("(\\w)(\\w)\\2\\1");
@@ -40,7 +43,7 @@ public class Day07 {
     }
 
     public static void main(String[] args) {
-        List<String> strings = new Input(2016, "input07.txt").strings();
+        List<String> strings = new Input(2016, 7).strings();
 
         System.out.println("Supports TLS: "
                 + strings.stream().filter(Day07::checkTLS).count());

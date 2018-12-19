@@ -7,6 +7,9 @@ import java.util.stream.IntStream;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2016/day/3
+ */
 public class Day03 {
 
     static boolean possible(int a, int b, int c) {
@@ -14,7 +17,7 @@ public class Day03 {
     }
 
     public static void main(String[] args) {
-        List<String> lines = new Input(2016, "input03.txt").strings();
+        List<String> lines = new Input(2016, 3).strings();
         int[] sides = lines.stream()
                 .flatMap(x -> Arrays.stream(x.trim().split("\\s+")))
                 .mapToInt(Integer::valueOf)
@@ -24,13 +27,13 @@ public class Day03 {
                 .filter(i -> possible(sides[i*3], sides[i*3+1], sides[i*3+2]))
                 .count();
 
-        System.out.println(n);
+        System.err.println(n);
 
         n = IntStream.range(0, lines.size())
                 .filter(i -> possible(sides[i/3*9 + i%3], sides[i/3*9 + i%3 + 3], sides[i/3*9 + i%3 + 6]))
                 .count();
 
-        System.out.println(n);
+        System.err.println(n);
     }
 
 }

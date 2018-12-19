@@ -4,15 +4,17 @@ import java.awt.Point;
 
 import adventofcode2016.PathFinder.PathFinder2D;
 
+/**
+ * https://adventofcode.com/2016/day/13
+ */
 public class Day13 {
+
+    static int input = 1352;
 
     static boolean isEmpty(Point p) {
         int x = p.x, y = p.y;
         return x >= 0 && y >= 0 &&
-            Integer.toBinaryString((x+3)*x + (2*x + y + 1)*y + 1352)
-                    .chars()
-                    .filter(c -> c=='1')
-                    .count() % 2 == 0;
+                Integer.bitCount((x+3)*x + (2*x + y + 1)*y + input) % 2 == 0;
     }
 
     public static void main(String[] args) {

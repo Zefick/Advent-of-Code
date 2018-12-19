@@ -4,13 +4,18 @@ import java.io.IOException;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+/**
+ * https://adventofcode.com/2016/day/15
+ */
 public class Day15 {
 
-    static int data[][] = {
-        {17, 1}, {7, 0}, {19, 2}, {5, 0}, {3, 0}, {13, 5}, {11, 0}
-    };
+    static int data1[][] = {
+        {17, 1}, {7, 0}, {19, 2}, {5, 0}, {3, 0}, {13, 5}};
+    
+    static int data2[][] = {
+        {17, 1}, {7, 0}, {19, 2}, {5, 0}, {3, 0}, {13, 5}, {11, 0}};
 
-    static int bruteforce() {
+    static int bruteforce(int data[][]) {
         return IntStream.iterate(1, x -> x+1)
                 .filter(t -> Stream.of(data).allMatch(d -> (t + d[1]) % d[0] == 0))
                 .findFirst().getAsInt();
@@ -28,8 +33,11 @@ public class Day15 {
     }
 
     public static void main(String[] args) throws IOException {
-        IntStream.range(0, data.length).forEach(i -> data[i][1] += i);
-        Stream.of(data).reduce(Day15::zip).ifPresent(x -> System.out.println(x[0]-x[1]));
+        IntStream.range(0, data1.length).forEach(i -> data1[i][1] += i+1);
+        Stream.of(data1).reduce(Day15::zip).ifPresent(x -> System.err.println(x[0]-x[1]));
+
+        IntStream.range(0, data2.length).forEach(i -> data2[i][1] += i+1);
+        Stream.of(data2).reduce(Day15::zip).ifPresent(x -> System.err.println(x[0]-x[1]));
     }
 
 }

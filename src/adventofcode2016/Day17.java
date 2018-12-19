@@ -1,46 +1,42 @@
 
 package adventofcode2016;
 
-import java.util.function.BinaryOperator;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 
 import utils.MD5;
 
+/**
+ * https://adventofcode.com/2016/day/17
+ */
 public class Day17 {
 
-    static int h = 0;
+    static Set<String> solutions = new HashSet<>();
 
-    static final BinaryOperator<String> cmp = (s1, s2) -> (s2.length() > s1.length() ? s2 : s1);
-
-    static String findPath(int x, int y, String passcode) {
+    static void findPath(int x, int y, String passcode) {
         if (x == 3 && y ==3) {
-            return passcode;
+            solutions.add(passcode);
+            return;
         }
-
-        int hash[] = MD5.encode(passcode).chars().limit(4).map(c -> (c>'a' && c<='f') ? 1 : 0).toArray();
-        h++;
-        String path = passcode;
-        if (y > 0 && hash[0] == 1) {
-            path = findPath(x, y-1, passcode + 'U');
-        }
-        if (y < 3 && hash[1] == 1) {
-            path = cmp.apply(path, findPath(x, y+1, passcode + 'D'));
-        }
-        if (x > 0 && hash[2] == 1) {
-            path = cmp.apply(path, findPath(x-1, y, passcode + 'L'));
-        }
-        if (x < 3 && hash[3] == 1) {
-            path = cmp.apply(path, findPath(x+1, y, passcode + 'R'));
-        }
-        return path;
+        int hash[] = MD5.encode(passcode).chars().limit(4)
+                .map(c -> (c>'a' && c<='f') ? 1 : 0)
+                .toArray();
+        if (y > 0 && hash[0] == 1) findPath(x, y-1, passcode + 'U');
+        if (y < 3 && hash[1] == 1) findPath(x, y+1, passcode + 'D');
+        if (x > 0 && hash[2] == 1) findPath(x-1, y, passcode + 'L');
+        if (x < 3 && hash[3] == 1) findPath(x+1, y, passcode + 'R');
     }
 
     public static void main(String[] args) {
-        String passcode = "pvhmgsws";
-        String path = findPath(0, 0, passcode);
+        String passcode = "njfxhljp";
+        findPath(0, 0, passcode);
+        Comparator<String> comparator = Comparator.comparing(String::length);
+        String shortest = solutions.stream().min(comparator).get();
+        System.err.println(shortest.substring(passcode.length()));
 
-        System.out.println(path.length() - passcode.length());
-        System.out.println(path.substring(passcode.length()));
-        System.out.println(h);
+        String longest = solutions.stream().max(comparator).get();
+        System.err.println(longest.length() - passcode.length());
     }
 
 }

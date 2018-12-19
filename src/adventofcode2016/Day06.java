@@ -1,25 +1,32 @@
 
 package adventofcode2016;
 
-import java.util.Comparator;
+import java.util.List;
 import java.util.stream.IntStream;
 
 import utils.Input;
+import utils.Utils;
 
+/**
+ * https://adventofcode.com/2016/day/6
+ */
 public class Day06 {
 
     public static void main(String[] args) {
         int dict[][] = new int[8][26];
 
-        new Input(2016, "input06.txt").strings().forEach(s -> {
-            IntStream.range(0, 8).forEach(i -> dict[i][s.charAt(i)-'a']++);
-        });
-        // finds least frequent character.
-        // 0 transformed to 100
+        List<String> strings = new Input(2016, 6).strings();
+        strings.forEach(s -> IntStream.range(0, 8)
+                .forEach(i -> dict[i][s.charAt(i)-'a']++));
+
         IntStream.range(0, 8)
-            .mapToObj(i -> (char)(IntStream.range(0, 26).boxed()
-                    .min(Comparator.comparing(x -> (dict[i][x]-1) % 100)).get()+'a'))
-            .forEach(System.out::print);
+                .mapToObj(i -> (char)(Utils.maxIndex(dict[i])+'a'))
+                .forEach(System.err::print);
+        System.err.println();
+
+        IntStream.range(0, 8)
+                .mapToObj(i -> (char)(Utils.minIndex(dict[i])+'a'))
+                .forEach(System.err::print);
     }
 
 }

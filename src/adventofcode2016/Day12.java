@@ -3,6 +3,9 @@ package adventofcode2016;
 
 import java.io.IOException;
 
+/**
+ * https://adventofcode.com/2016/day/12
+ */
 public class Day12 {
 
     static String[] commands = {
@@ -22,8 +25,8 @@ public class Day12 {
         "cpy c b   ",
         "dec d     ",
         "jnz d -6  ",
-        "cpy 19 c  ",
-        "cpy 11 d  ",
+        "cpy 13 c  ",
+        "cpy 14 d  ",
         "inc a     ",
         "dec d     ",
         "jnz d -2  ",
@@ -33,10 +36,16 @@ public class Day12 {
 
     public static void main(String[] args) throws IOException {
         Assembunny asm = new Assembunny();
-        asm.setRegisterss(0, 0, 1, 0);
+        asm.setRegisters(0, 0, 0, 0);
         asm.setCommands(commands);
         asm.run();
-        System.out.println(asm.getRegisters()[0]);
+        System.err.println(asm.getRegisters()[0]);
+
+        asm = new Assembunny();
+        asm.setRegisters(0, 0, 1, 0);
+        asm.setCommands(commands);
+        asm.run();
+        System.err.println(asm.getRegisters()[0]);
     }
 
 }

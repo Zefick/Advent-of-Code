@@ -1,18 +1,17 @@
 package adventofcode2016;
 
 import java.awt.Point;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
+import adventofcode2016.PathFinder.PathFinder2D;
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2016/day/24
+ */
 public class Day24 {
 
     static int map[][] = new int[42][];
@@ -21,28 +20,15 @@ public class Day24 {
         if (src.equals(dest)) {
             return 0;
         }
-        Set<Point> visited = new HashSet<>();
-        List<Point> current = new ArrayList<>();
-        current.add(src);
-        int len = 0;
-        int dirs[][] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        while (!current.isEmpty()) {
-            len++;
-            current = current.stream()
-                .flatMap(p -> Stream.of(dirs).map(d -> new Point(p.x+d[1], p.y+d[0])))
-                .distinct()
-                .filter(p -> !visited.contains(p) && map[p.y][p.x] != '#')
-                .collect(Collectors.toList());
-            if (current.contains(dest)) {
-                return len;
-            }
-            visited.addAll(current);
-        }
-        return len;
+        PathFinder2D pf = new PathFinder2D();
+        pf.setMovePredicate(p -> map[p.y][p.x] != '#');
+        pf.setFinishCallback(() -> pf.stop());
+        pf.run(src, dest);
+        return pf.steps;
     }
 
     public static void main(String[] args) {
-        List<String> data = new Input(2016, "input24.txt").strings();
+        List<String> data = new Input(2016, 24).strings();
 
         Point pts[] = new Point[8];
         int paths[][] = new int[8][8];
@@ -64,17 +50,18 @@ public class Day24 {
 
         List<Integer> steps = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
 
-        int min = Integer.MAX_VALUE;
-
-        for (i=0; i<10000; i++) {
+        int min1 = Integer.MAX_VALUE;
+        int min2 = min1;
+        for (i=0; i<100000; i++) {
             Collections.shuffle(steps);
-            int len = paths[0][steps.get(0)] + paths[steps.get(6)][0] +
+            int len1 = paths[0][steps.get(0)] +
                     IntStream.range(0, 6).map(x -> paths[steps.get(x)][steps.get(x+1)]).sum();
-            if (len < min) {
-                min = len;
-            }
+            int len2 = len1 + paths[steps.get(6)][0];
+            if (len1 < min1) min1 = len1;
+            if (len2 < min2) min2 = len2;
         }
-        System.out.println(min);
+        System.err.println(min1);
+        System.err.println(min2);
     }
 
 }

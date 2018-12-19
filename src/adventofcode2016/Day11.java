@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.stream.IntStream;
 
+/**
+ * https://adventofcode.com/2016/day/11
+ */
 public class Day11 {
 
     // .  . | .  . | .  . | .  . | .  .  ",
@@ -57,7 +60,7 @@ public class Day11 {
         return map | (f1 << (e1*14)) | (f2 << (e2*14));    // fill new floors
     }
 
-    public static void main(String[] args) {
+    static void findPath(long start, long finish) {
 
         // creating a list of moves by enumerating all possible combinations
         int pos[] = IntStream.range(0, 14)
@@ -68,7 +71,6 @@ public class Day11 {
 
         HashSet<Long> allMoves = new HashSet<Long>();
         ArrayList<Long> current = new ArrayList<Long>();
-
         allMoves.add(hash(start));
         current.add(start);
 
@@ -95,7 +97,7 @@ public class Day11 {
                             long hash = hash(newmap);
                             if (!allMoves.contains(hash)) {
                                 if (newmap == finish) {
-                                    System.out.println(" * " + depth);
+                                    System.err.println(depth);
                                 }
                                 next.add(newmap);
                                 allMoves.add(hash);
@@ -107,6 +109,11 @@ public class Day11 {
             current = next;
         }
         System.out.printf("%.3f s.\n", (System.currentTimeMillis() - t) * 1e-3);
+    }
+
+    public static void main(String[] args) {
+        findPath(start, finish);
+        findPath(start | (0b1111L << 52), finish | (0b1111L << 10));
     }
 
 }

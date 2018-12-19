@@ -33,7 +33,7 @@ public class Assembunny {
         return output;
     }
 
-    public void setRegisterss(int a, int b, int c, int d) {
+    public void setRegisters(int a, int b, int c, int d) {
         registers = new int[] {a, b, c, d};
     }
 

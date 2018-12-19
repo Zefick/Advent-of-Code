@@ -10,10 +10,15 @@ import java.util.stream.Collectors;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2016/day/4
+ */
 public class Day04 {
 
     // groups: 1 - room name, 2 - id, 3 - checksum
     static Pattern p = Pattern.compile("([-a-z]*)-(\\d+)\\[(\\w{5})\\]");
+
+    static int northpoleId;
 
     static int getID(String room) {
         Matcher m = p.matcher(room);
@@ -27,6 +32,10 @@ public class Day04 {
                 .mapToObj(x -> String.valueOf((char)x))
                 .collect(Collectors.joining());
 
+        if (decripted.contains("northpole")) {
+            northpoleId = id;
+        }
+
         ToLongFunction<Integer> counter = c -> name.chars().filter(x -> x == c).count();
 
         String checksum = name.chars()
@@ -37,17 +46,14 @@ public class Day04 {
                 .map(x -> String.valueOf((char)(int)x))
                 .collect(Collectors.joining());
 
-        if (decripted.contains("northpole")) {
-            System.out.printf("%s %d%n", decripted, id);
-        }
-
         boolean isReal = checksum.equals(m.group(3));
         return isReal ? id : 0;
     }
 
     public static void main(String[] args) {
-        List<String> input = new Input(2016, "input04.txt").strings();
-        System.out.println("Sum: " + input.stream().mapToInt(Day04::getID).sum());
+        List<String> input = new Input(2016, 4).strings();
+        System.err.println(input.stream().mapToInt(Day04::getID).sum());
+        System.err.println(northpoleId);
     }
 
 }

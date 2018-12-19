@@ -7,15 +7,17 @@ import java.util.stream.IntStream;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2016/day/8
+ */
 public class Day08 {
 
     static final int H = 6, W = 50;
     static byte screen[][] = new byte[H][W];
     static byte buffer[] = new byte[Math.max(W, H)];
 
-
     public static void main(String[] args) {
-        List<String> seq = new Input(2016, "input08.txt").strings();
+        List<String> seq = new Input(2016, 8).strings();
         seq.forEach(s -> {
             String parts[] = s.split(" ");
             if (parts[0].equals("rect")) {
@@ -45,8 +47,7 @@ public class Day08 {
 
         System.out.println(n);
 
-        Arrays.stream(screen)
-                .map(String::new)
+        Arrays.stream(screen).map(String::new)
                 .forEach(System.out::println);
     }
 

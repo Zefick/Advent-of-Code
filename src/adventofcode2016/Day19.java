@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * https://adventofcode.com/2016/day/19
+ */
 public class Day19 {
 
     /**
@@ -35,19 +38,18 @@ public class Day19 {
     }
 
     public static void main(String[] args) {
-
-        int n = 3014603;
-        BlockList m = new BlockList(n, 10000);
-
-        for (int i=0; n > 1; n--) {
-            i %= n;
-            int j = (i+n/2) % n;
-            m.get(j, true);
-            if (i < j) i++;
-
-            if (n % 100000 == 0) System.out.println(n);
+        for (int k=0; k<2; k++) {
+            int n = 3017957;
+            BlockList m = new BlockList(n, 10000);
+            for (int i=0; n > 1; n--) {
+                i %= n;
+                int j = ((k == 0) ? (i+1) : (i+n/2)) % n;
+                m.get(j, true);
+                if (i < j) i++;
+                if (n % 1000000 == 0) System.out.println(n);
+            }
+            System.err.println(m.get(0, false));
         }
-        System.out.println(m.get(0, false));
     }
 
 }

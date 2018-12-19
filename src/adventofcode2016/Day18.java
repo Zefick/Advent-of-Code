@@ -2,23 +2,23 @@ package adventofcode2016;
 
 import java.util.Arrays;
 
+/**
+ * https://adventofcode.com/2016/day/18
+ */
 public class Day18 {
 
     static String start =
-            "^^.^..^.....^..^..^^...^^.^....^^^.^.^^....^.^^^...^^^^.^^^^.^..^^^^.^^.^.^.^.^.^^...^^..^^^..^.^^^^";
-
-    static int countSafe(int m[]) {
-        return (int)Arrays.stream(m).filter(x -> x == '.').count();
-    }
+            "^.^^^.^..^....^^....^^^^.^^.^...^^.^.^^.^^.^^..^.^...^.^..^.^^.^..^.....^^^.^.^^^..^^...^^^...^...^.";
 
     public static void main(String[] args) {
-        int lines = 400000;
         int len = start.length();
         int map1[] = start.chars().toArray();
-
         int cnt = 0;
-        for (int i=0; i<lines-1; i++) {
-            cnt += countSafe(map1);
+        for (int i=0; i<400000; i++) {
+            if (i == 40) {
+                System.err.println(cnt);
+            }
+            cnt += Arrays.stream(map1).filter(x -> x == '.').count();
             int map2[] = new int[len];
             for (int j=0; j<len; j++) {
                 boolean a = (j==0) || (map1[j-1]=='.'),
@@ -29,8 +29,7 @@ public class Day18 {
             }
             map1 = map2;
         }
-
-        System.out.println(cnt + countSafe(map1));
+        System.err.println(cnt);
     }
 
 }

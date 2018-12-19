@@ -1,11 +1,14 @@
 package adventofcode2016;
 
+/**
+ * https://adventofcode.com/2016/day/25
+ */
 public class Day25 {
 
     static String[] commands = {
         "cpy a d   ",
-        "cpy 14 c  ",
-        "cpy 182 b ",
+        "cpy 11 c  ",
+        "cpy 231 b ",
         "inc d     ",
         "dec b     ",
         "jnz b -2  ",
@@ -47,7 +50,7 @@ public class Day25 {
                     }
                 }
             };
-            asm.setRegisterss(i, 0, 0, 0);
+            asm.setRegisters(i, 0, 0, 0);
             asm.setCommands(commands);
             asm.run();
 
@@ -55,7 +58,7 @@ public class Day25 {
             System.out.printf("%5d | %s\n", i, out);
 
             if (out.matches("^(01)*(0)?$")) {
-                System.out.println(" * " + i);
+                System.err.println(i);
                 return;
             }
         }

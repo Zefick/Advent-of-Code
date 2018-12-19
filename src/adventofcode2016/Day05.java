@@ -3,11 +3,14 @@ package adventofcode2016;
 
 import utils.MD5;
 
+/**
+ * https://adventofcode.com/2016/day/5
+ */
 public class Day05 {
 
     public static void main(String[] args) {
         int index = 0;
-        String id = "wtnhxymk";
+        String id = "ugkcyxxp";
         char pass[] = new char[8];
 
         for (int i=0; i<8;) {
@@ -18,7 +21,7 @@ public class Day05 {
             }
             index++;
         }
-        System.out.println(new String(pass));
+        System.err.println(new String(pass));
 
         pass = new char[8];
         index = 0;
@@ -33,7 +36,7 @@ public class Day05 {
             }
             index++;
         }
-        System.out.println(new String(pass));
+        System.err.println(new String(pass));
     }
 
 }

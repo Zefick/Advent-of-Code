@@ -3,6 +3,9 @@ package adventofcode2016;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2016/day/2
+ */
 public class Day02 {
 
     static char[][] map1 = {
@@ -27,7 +30,7 @@ public class Day02 {
     private static void handleMap(char[][] map, int x, int y) {
         int p1[] = {y, x};
         String result = "";
-        for (String s : new Input(2016, "input02.txt").strings()) {
+        for (String s : new Input(2016, 2).strings()) {
             for (int c : s.toCharArray()) {
                 int p2[];
                 if (c == 'L')      p2 = new int[] {Math.max(0, p1[0]-1), p1[1]};
@@ -38,7 +41,7 @@ public class Day02 {
             }
             result += map[p1[1]][p1[0]];
         }
-        System.out.println(result);
+        System.err.println(result);
     }
 
 }

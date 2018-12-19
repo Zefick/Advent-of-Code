@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import utils.Input;
 
 /**
+ * https://adventofcode.com/2016/day/21
+ * 
  * The most tedious task. Let's fun with some OOP.
  */
 public class Day21 {
@@ -190,17 +192,27 @@ public class Day21 {
     }
 
     public static void main(String[] args) {
-        char input[] = "fbgdceah".toCharArray();
-
-        List<Action> commands = new Input(2016, "input21.txt").strings().stream()
+        List<Action> commands = new Input(2016, 21)
+                .strings().stream()
                 .map(Day21::createAction)
                 .collect(Collectors.toList());
-        Collections.reverse(commands);
-
-        for (Action action : commands) {
-            input = action.decript(input);
+        
+        { // Part 1
+            char[] password = "abcdefgh".toCharArray();
+            for (Action action : commands) {
+                password = action.encript(password);
+            }
+            System.err.println(new String(password));
         }
-        System.out.println(new String(input));
+
+        { // Part 2
+            char[] password = "fbgdceah".toCharArray();
+            Collections.reverse(commands);
+            for (Action action : commands) {
+                password = action.decript(password);
+            }
+            System.err.println(new String(password));
+        }
     }
 
 }
