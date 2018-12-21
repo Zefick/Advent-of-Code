@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import utils.Input;
 
@@ -127,13 +126,5 @@ public class Day15 {
         System.err.println(results.get(0));
         System.err.println(results.get(results.size() - 1));
         System.out.println("time: " + (System.currentTimeMillis() - time));
-    }
-
-    static void printMap(int[][] map) {
-        Arrays.stream(map)
-                .map(s -> Arrays.stream(s).mapToObj(c -> Character.toString((char)c))
-                        .collect(Collectors.joining()))
-                .forEach(System.out::println);
-        System.out.println();
     }
 }
