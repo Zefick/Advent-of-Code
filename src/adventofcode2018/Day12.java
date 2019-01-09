@@ -20,7 +20,7 @@ public class Day12 {
                 .map(rule -> rule[0])
                 .collect(Collectors.toSet());
 
-        for (int i=0; i<10000; i++) {
+        for (int i=1; i<10000; i++) {
             String prevState = state;
             String newState = "..." + state + "....";
             state = IntStream.range(0, newState.length()-4)
@@ -29,12 +29,12 @@ public class Day12 {
                     .collect(Collectors.joining())
                     .substring(1)
                     .replaceFirst("\\.*$", "");
-            if (i == 19) {
+            if (i == 20) {
                 System.err.println(count(state));
             }
             if (state.equals("." + prevState)) {
                 int n = state.replace(".", "").length();
-                System.err.println(50_000_000_000L * n + count(state) - (i+1) * n);
+                System.err.println((50_000_000_000L - i) * n + count(state));
                 break;
             }
         }

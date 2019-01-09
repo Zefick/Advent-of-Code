@@ -1,13 +1,10 @@
 
 package utils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.io.*;
+import java.util.*;
+import java.util.regex.*;
+import java.util.stream.*;
 
 public class Input {
 
@@ -27,6 +24,13 @@ public class Input {
         } catch (IOException e) {
             return Collections.emptyList();
         }
+    }
+
+    public Stream<Matcher> match(String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        return strings().stream()
+                .map(pattern::matcher)
+                .filter(Matcher::find);
     }
 
     public int[][] getMap() {
