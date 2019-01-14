@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2017/day/21
+ */
 public class Day21 {
 
     static byte[][] rotate(byte map[][]) {
@@ -34,10 +37,8 @@ public class Day21 {
     }
 
     public static void main(String[] args) {
-        List<String> input = new Input(2017, "input21.txt").strings();
-
+        List<String> input = new Input(2017, 21).strings();
         Map<Integer, String> rules = new HashMap<>();
-
         for (String rule : input) {
             String s[] = rule.split(" => ");
             byte left[] = s[0].getBytes();
@@ -56,7 +57,7 @@ public class Day21 {
 
         byte map[][] = {{'.', '#', '.'}, {'.', '.', '#'}, {'#', '#', '#'}};
 
-        for (int i=0; i<22; ++i) {
+        for (int i=1; i<=18; ++i) {
             int size = map.length;
             int cellSize = 2 + size % 2;
             byte newMap[][] = new byte[size + (size/cellSize)][size + (size/cellSize)];
@@ -84,7 +85,9 @@ public class Day21 {
                     n += map[x][y] == '#' ? 1 : 0;
                 }
             }
-            System.out.println((i+1) + ": " + n);
+            if (i == 5 || i == 18) {
+                System.err.println(i + ": " + n);
+            }
         }
     }
 }

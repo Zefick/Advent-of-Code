@@ -4,6 +4,9 @@ package adventofcode2017;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
+/**
+ * https://adventofcode.com/2017/day/15
+ */
 public class Day15 {
 
     private static long[] gen(long init, long mul, long mod, int count) {

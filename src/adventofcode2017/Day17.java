@@ -1,6 +1,9 @@
 
 package adventofcode2017;
 
+/**
+ * https://adventofcode.com/2017/day/17
+ */
 public class Day17 {
 
     static class SpinNode {

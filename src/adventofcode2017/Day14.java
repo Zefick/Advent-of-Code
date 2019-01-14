@@ -4,6 +4,9 @@ package adventofcode2017;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+/**
+ * https://adventofcode.com/2017/day/14
+ */
 public class Day14 {
 
     static void markGroup(byte map[][], int i, int j) {

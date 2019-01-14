@@ -19,7 +19,7 @@ public class Day23 {
             this.z = z;
             this.r = r;
         }
-        boolean testContains(int[] bot) {
+        boolean contains(int[] bot) {
             return bot[3] >=
                     Math.max(x - bot[0], 0) + Math.max(bot[0] - x - r, 0)
                   + Math.max(y - bot[1], 0) + Math.max(bot[1] - y - r, 0)
@@ -31,7 +31,7 @@ public class Day23 {
             if (r != reg.r) return reg.r - r;
             if (x + y + z > reg.x + reg.y + reg.z) return 1;
             if (x + y + z < reg.x + reg.y + reg.z) return -1;
-            return hashCode();
+            return hashCode() - reg.hashCode();
         }
     }
 
@@ -61,7 +61,7 @@ public class Day23 {
         Region region = new Region(
                 (xMax + xMin - R) / 2, (yMax + yMin - R) / 2,
                 (zMax + zMin - R) / 2, R);
-        region.bots = (int)bots.stream().filter(region::testContains).count();
+        region.bots = (int)bots.stream().filter(region::contains).count();
         TreeSet<Region> map = new TreeSet<>(Collections.singleton(region));
         for (int boxes = 1; ; boxes++) {
             Region reg = map.pollLast();
@@ -73,7 +73,7 @@ public class Day23 {
             int r = reg.r / 2;
             for (int i=0; i<8; i++) {
                 Region child = new Region(reg.x + r*(i&1), reg.y + r*(i/2&1), reg.z + r*(i/4&1), r);
-                child.bots = (int)bots.stream().filter(child::testContains).count();
+                child.bots = (int)bots.stream().filter(child::contains).count();
                 map.add(child);
             }
         }

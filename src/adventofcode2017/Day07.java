@@ -1,16 +1,13 @@
 
 package adventofcode2017;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.*;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2017/day/7
+ */
 public class Day07 {
 
     static class Node {
@@ -40,13 +37,9 @@ public class Day07 {
     }
 
     public static void main(String[] args) throws Exception {
-        List<String> input = new Input(2017, "input07.txt").strings();
-
-        Pattern p = Pattern.compile("([a-z]+) \\((\\d+)\\)( -> (([a-z]+(\\,\\s)?)*))?");
-
-        for (String s : input) {
-            Matcher m = p.matcher(s);
-            m.find();
+        new Input(2017, 7)
+                .match("([a-z]+) \\((\\d+)\\)( -> (([a-z]+(,\\s)?)*))?")
+                .forEach(m -> {
             Node node = new Node();
             node.name = m.group(1);
             node.weigth = Integer.parseInt(m.group(2));
@@ -54,7 +47,7 @@ public class Day07 {
                     .map(children -> children.split(",\\s+"))
                     .orElse(new String[0]);
             tower.put(node.name, node);
-        }
+        });
 
         for (Node node : tower.values()) {
             for (String child : node.children) {
@@ -65,7 +58,7 @@ public class Day07 {
                 .filter(node -> node.parent == null)
                 .findFirst().get();
 
-        System.out.println(root.name);
+        System.err.println(root.name);
 
         checkWeigth(root);
     }

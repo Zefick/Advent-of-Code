@@ -3,10 +3,13 @@ package adventofcode2017;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2017/day/11
+ */
 public class Day11 {
 
     public static void main(String[] args) throws Exception {
-        String input = new Input(2017, "input11.txt").strings().get(0);
+        String input = new Input(2017, 11).strings().get(0);
 
         int x = 0, y = 0;
         int max = 0, steps = 0;

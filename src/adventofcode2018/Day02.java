@@ -11,7 +11,7 @@ import utils.Input;
 public class Day02 {
 
     public static void main(String[] args) {
-        List<String> input = new Input(2018, "input02.txt").strings();
+        List<String> input = new Input(2018, 2).strings();
         input.sort(Comparator.naturalOrder());
         
         int _2 = 0, _3 = 0;

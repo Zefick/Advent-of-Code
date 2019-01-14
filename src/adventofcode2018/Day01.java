@@ -14,7 +14,7 @@ public class Day01 {
 
     public static void main(String[] args) {
 
-        int[] numbers = new Input(2018, "input01.txt")
+        int[] numbers = new Input(2018, 1)
                 .strings().stream()
                 .mapToInt(Integer::parseInt)
                 .toArray();

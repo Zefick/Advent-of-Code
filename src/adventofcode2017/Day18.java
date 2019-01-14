@@ -9,6 +9,9 @@ import java.util.Map;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2017/day/18
+ */
 public class Day18 {
 
     static long getVal(String id, Map<String, Long> registers) {
@@ -27,7 +30,7 @@ public class Day18 {
     }
 
     public static void main(String[] args) {
-        List<String> input = new Input(2017, "input18.txt").strings();
+        List<String> input = new Input(2017, 18).strings();
 
         State states[] = {new State(), new State()};
         states[1].registers.put("p", 1l);

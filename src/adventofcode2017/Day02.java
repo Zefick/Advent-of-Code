@@ -6,10 +6,13 @@ import java.util.List;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2017/day/2
+ */
 public class Day02 {
 
     public static void main(String[] args) throws Exception {
-        List<String> input = new Input(2017, "input02.txt").strings();
+        List<String> input = new Input(2017, 2).strings();
 
         int sum1 = 0, sum2 = 0;
         for (String s : input) {

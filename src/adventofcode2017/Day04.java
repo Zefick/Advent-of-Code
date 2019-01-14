@@ -6,6 +6,9 @@ import java.util.List;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2017/day/4
+ */
 public class Day04 {
 
     static boolean check1(String[] arr) {
@@ -19,7 +22,7 @@ public class Day04 {
     }
 
     public static void main(String[] args) throws Exception {
-        List<String> input = new Input(2017, "input04.txt").strings();
+        List<String> input = new Input(2017, 4).strings();
         String arrays[][] = input.stream().map(s -> s.split("\\s+")).toArray(String[][]::new);
         System.out.println(Arrays.stream(arrays).filter(Day04::check1).count());
         System.out.println(Arrays.stream(arrays).filter(Day04::check2).count());

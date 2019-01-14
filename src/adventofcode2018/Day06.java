@@ -1,9 +1,7 @@
 package adventofcode2018;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
 
@@ -15,16 +13,12 @@ import utils.Input;
 public class Day06 {
 
     public static void main(String[] args) {
-
-        List<String> numbers = new Input(2018, "input06.txt").strings();
-        List<Integer> coords = new ArrayList<>();
-
-        numbers.stream().forEach(s -> {
-            String c[] = s.split(",\\s+");
-            coords.add(Integer.parseInt(c[0]));
-            coords.add(Integer.parseInt(c[1]));
-        });
-        int n = coords.size() / 2;
+        int coords[] = new Input(2018, 6)
+                .match("(\\d+), (\\d+)")
+                .flatMapToInt(m -> IntStream.range(1, 3)
+                        .map(i -> Integer.parseInt(m.group(i))))
+                .toArray();
+        int n = coords.length / 2;
         int[] nearest = new int[n];
         Set<Integer> infinite = new HashSet<>();
 
@@ -36,7 +30,7 @@ public class Day06 {
                 boolean b = true;
                 int dsum = 0;
                 for (int k=0; k<n; k++) {
-                    int d = Math.abs(coords.get(k*2) - i) + Math.abs(coords.get(k*2+1) - j);
+                    int d = Math.abs(coords[k*2] - i) + Math.abs(coords[k*2+1] - j);
                     dsum += d;
                     if (d == minD) {
                         b = false;

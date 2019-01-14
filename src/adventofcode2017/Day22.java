@@ -7,6 +7,9 @@ import java.util.Map;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2017/day/22
+ */
 public class Day22 {
 
     static int hash (int x, int y) {
@@ -18,7 +21,7 @@ public class Day22 {
     }
 
     public static void main(String[] args) {
-        List<String> input = new Input(2017, "input22.txt").strings();
+        List<String> input = new Input(2017, 22).strings();
 
         Map<Integer, State> infected =new HashMap<>();
 
@@ -62,7 +65,6 @@ public class Day22 {
             x += dir[1];
             y += dir[0];
         }
-
-        System.out.println(count);
+        System.err.println(count);
     }
 }

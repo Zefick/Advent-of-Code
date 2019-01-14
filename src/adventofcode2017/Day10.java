@@ -4,6 +4,9 @@ package adventofcode2017;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+/**
+ * https://adventofcode.com/2017/day/10
+ */
 public class Day10 {
 
     public static void main(String[] args) throws Exception {

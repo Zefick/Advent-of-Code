@@ -13,9 +13,8 @@ import utils.Input;
 public class Day24 {
 
     public static void main(String[] args) {
-        List<String> input = new Input(2017, "input24.txt").strings();
-
-        List<int[]> parts = input.stream()
+        List<int[]> parts = new Input(2017, 24)
+                .strings().stream()
                 .map(s -> s.split("/"))
                 .map(s -> new int[] {Integer.parseInt(s[0]), Integer.parseInt(s[1])})
                 .collect(Collectors.toList());

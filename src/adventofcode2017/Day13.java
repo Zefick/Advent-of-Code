@@ -10,12 +10,13 @@ import java.util.stream.Stream;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2017/day/13
+ */
 public class Day13 {
 
     public static void main(String[] args) throws Exception {
-        List<String> input = new Input(2017, "input13.txt").strings();
-
-        List<int[]> firewall = input.stream()
+        List<int[]> firewall = new Input(2017, 13).strings().stream()
                 .map(s -> Arrays.stream(s.split(": ")).mapToInt(Integer::parseInt).toArray())
                 .collect(Collectors.toList());
 

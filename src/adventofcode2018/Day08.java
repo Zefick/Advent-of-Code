@@ -11,7 +11,8 @@ import utils.Input;
 public class Day08 {
 
     public static void main(String[] args) {
-        int[] input = Arrays.stream(new Input(2018, "input08.txt").strings().get(0).split("\\s+"))
+        int[] input = Arrays.stream(new Input(2018, 8)
+                .strings().get(0).split("\\s+"))
                 .mapToInt(Integer::parseInt)
                 .toArray();
 

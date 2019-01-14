@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.IntStream;
 
+/**
+ * https://adventofcode.com/2017/day/6
+ */
 public class Day06 {
 
     public static void main(String[] args) throws Exception {

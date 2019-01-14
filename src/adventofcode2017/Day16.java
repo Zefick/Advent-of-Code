@@ -7,6 +7,9 @@ import java.util.List;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2017/day/16
+ */
 public class Day16 {
 
     static byte[] dance(Object moves[][], byte programs[]) {
@@ -39,26 +42,25 @@ public class Day16 {
         return programs;
     }
 
+    static Object[] readMove(String move) {
+        Object parts[] = new Object[3];
+        parts[0] = move.substring(0, 1);
+        if (move.startsWith("s")) {
+            parts[1] = Integer.parseInt(move.substring(1));
+        } else if (move.startsWith("x")) {
+            parts[1] = Integer.parseInt(move.substring(1).split("/")[0]);
+            parts[2] = Integer.parseInt(move.substring(1).split("/")[1]);
+        } else {
+            parts[1] = (byte)move.substring(1).split("/")[0].charAt(0);
+            parts[2] = (byte)move.substring(1).split("/")[1].charAt(0);
+        }
+        return parts;
+    }
+
     public static void main(String[] args) {
-        String input = new Input(2017, "input16.txt").strings().get(0);
-
-        Object moves[][] = Arrays.stream(input.split(","))
-                .map(move -> {
-                    Object parts[] = new Object[3];
-                    parts[0] = move.substring(0, 1);
-                    if (move.startsWith("s")) {
-                        parts[1] = Integer.parseInt(move.substring(1));
-                    } else if (move.startsWith("x")) {
-                        parts[1] = Integer.parseInt(move.substring(1).split("/")[0]);
-                        parts[2] = Integer.parseInt(move.substring(1).split("/")[1]);
-                    } else {
-                        parts[1] = (byte)move.substring(1).split("/")[0].charAt(0);
-                        parts[2] = (byte)move.substring(1).split("/")[1].charAt(0);
-                    }
-                    return parts;
-                })
+        Object moves[][] = Arrays.stream(new Input(2017, 16).strings().get(0).split(","))
+                .map(Day16::readMove)
                 .toArray(Object[][]::new);
-
 
         byte programs[] = "abcdefghijklmnop".getBytes();
 

@@ -16,12 +16,10 @@ public class Day23 {
     }
 
     public static void main(String[] args) {
-        List<String> input = new Input(2017, "input23.txt").strings();
-
+        List<String> input = new Input(2017, 23).strings();
         Map<String, Long> registers = new HashMap<>();
         int cnt = 0;
         int pointer = 0;
-
         for (;pointer >= 0 && pointer < input.size();) {
             String command = input.get(pointer);
             String parts[] = command.split(" ");

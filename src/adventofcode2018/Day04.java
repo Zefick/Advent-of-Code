@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -19,10 +18,7 @@ import utils.Utils;
  * https://adventofcode.com/2018/day/4
  */
 public class Day04 {
-    
-    static Pattern p = Pattern.compile("\\[(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2})\\] "
-            + "((Guard #(\\d+) begins shift)|(falls asleep)|(wakes up))");
-    
+
     static class Entry {
         int guard;
         Action action;
@@ -32,9 +28,7 @@ public class Day04 {
             SHIFT, FALL, WAKE_UP;
         }
 
-        Entry(String s) {
-            Matcher m = p.matcher(s);
-            m.find();
+        Entry(Matcher m) {
             time = Calendar.getInstance();
             time.set(Integer.parseInt(m.group(1)), Integer.parseInt(m.group(2)), Integer.parseInt(m.group(3)), 
                     Integer.parseInt(m.group(4)), Integer.parseInt(m.group(5)));
@@ -50,8 +44,9 @@ public class Day04 {
     }
 
     public static void main(String[] args) {
-        List<Entry> entries = new Input(2018, "input04.txt")
-                .strings().stream()
+        String regexp = "\\[(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2}):(\\d{2})\\] "
+                + "((Guard #(\\d+) begins shift)|(falls asleep)|(wakes up))";
+        List<Entry> entries = new Input(2018, 4).match(regexp)
                 .map(Entry::new)
                 .sorted(Comparator.comparing(e -> e.time))
                 .collect(Collectors.toList());

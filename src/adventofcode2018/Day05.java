@@ -11,7 +11,7 @@ import utils.Input;
 public class Day05 {
     
     public static void main(String[] args) {
-        String input = new Input(2018, "input05.txt").strings().get(0);
+        String input = new Input(2018, 5).strings().get(0);
         
         String input0 = react(input);
         System.err.println(input0.length());

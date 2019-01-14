@@ -16,7 +16,7 @@ public class Day03 {
     static byte[][] fabric = new byte[1000][1000];
     
     public static void main(String[] args) {
-        List<String> input = new Input(2018, "input03.txt").strings();
+        List<String> input = new Input(2018, 3).strings();
         check(0, input);
     }
 

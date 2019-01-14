@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import utils.Input;
 
@@ -18,17 +16,14 @@ import utils.Input;
  */
 public class Day07 {
 
-    static Pattern p = Pattern.compile("Step (.) must be finished before step (.) can begin.");
-
     public static void main(String[] args) {
 
         Map<String, List<String>> order = new HashMap<>();
         Set<String> steps = new TreeSet<>();
 
-        List<String> input = new Input(2018, "input07.txt").strings();
-        for (String s : input) {
-            Matcher m = p.matcher(s);
-            m.find();
+        new Input(2018, 7)
+                .match("Step (.) must be finished before step (.) can begin.")
+                .forEach(m -> {
             String s1 = m.group(1);
             String s2 = m.group(2);
             steps.add(s1);
@@ -41,7 +36,7 @@ public class Day07 {
                 order.put(s2, list);
             }
             list.add(s1);
-        }
+        });
         order.values().stream().forEach(list -> list.sort(Comparator.naturalOrder()));
         System.out.println(order);
 

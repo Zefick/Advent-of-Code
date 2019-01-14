@@ -2,10 +2,7 @@ package adventofcode2018;
 
 import java.awt.Point;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import utils.Input;
 
@@ -15,12 +12,10 @@ import utils.Input;
 public class Day17 {
 
     public static void main(String[] args) {
-        List<String> input = new Input(2018, 17).strings();
-        Pattern p = Pattern.compile("(.)=(\\d+), .=(\\d+)..(\\d+)");
         Set<Point> clay = new HashSet<>();
-        for (String s : input) {
-            Matcher m = p.matcher(s);
-            m.find();
+        new Input(2018, 17)
+                .match("(.)=(\\d+), .=(\\d+)..(\\d+)")
+                .forEach(m -> {
             int x = Integer.parseInt(m.group(2));
             int a = Integer.parseInt(m.group(3));
             int b = Integer.parseInt(m.group(4));
@@ -29,7 +24,7 @@ public class Day17 {
                         ? new Point(x, y)
                         : new Point(y, x));
             }
-        }
+        });
         int minx = clay.stream().mapToInt(pt -> pt.x).min().getAsInt();
         int maxx = clay.stream().mapToInt(pt -> pt.x).max().getAsInt();
         int miny = clay.stream().mapToInt(pt -> pt.y).min().getAsInt();
