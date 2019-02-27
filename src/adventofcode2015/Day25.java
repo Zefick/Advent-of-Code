@@ -1,5 +1,8 @@
 package adventofcode2015;
 
+/**
+ * https://adventofcode.com/2015/day/25
+ */
 public class Day25 {
 
     public static void main(String[] args) {

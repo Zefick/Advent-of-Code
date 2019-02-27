@@ -8,6 +8,9 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+/**
+ * https://adventofcode.com/2015/day/11
+ */
 public class Day11 {
 
     public static void main(String[] args) {
@@ -33,8 +36,8 @@ public class Day11 {
         Stream.iterate(b, x -> x.add(BigInteger.ONE))
                 .map(x -> op2.apply(x.toString(26)))
                 .filter(isGood)
-                .limit(10)
-                .forEach(System.out::println);
+                .limit(2)
+                .forEach(System.err::println);
     }
 
 }

@@ -1,16 +1,19 @@
 package adventofcode2015;
 
-import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2015/day/19
+ */
 public class Day19 {
 
-    static List<String[]> rules = new ArrayList<>();
+    static List<String[]> rules;
     static int min = 1000;
 
     static void shrink(String start, int depth) {
@@ -34,18 +37,29 @@ public class Day19 {
     }
 
 	public static void main(String[] args) throws Exception {
+		Input input = new Input(2015, 19);
+		rules = input.match("(\\w+) => (\\w+)")
+				.map(m -> new String[] {m.group(1), m.group(2)})
+				.sorted(Comparator.comparing(s -> -s[1].length()))
+				.collect(Collectors.toList());
+
+		List<String> strings = input.strings();
+		String start = strings.get(strings.size()-1);
+		
+		Set<String> molecules = new HashSet<>();
+		for (String r[] : rules) {
+			for (int i=0; i<start.length(); i++) {
+				if (start.substring(i).startsWith(r[0])) {
+					String m = start.substring(0, i) + r[1] + start.substring(i + r[0].length());
+					if (!molecules.contains(m)) {
+						molecules.add(m);
+					}
+				}
+			}
+		}
+		System.err.println(molecules.size());
+
 		runCounter();
-	    Pattern p = Pattern.compile("(\\w+) => (\\w+)");
-	    List<String> input = new Input(2015, "input19.txt").strings();
-	    int i=0;
-	    for (;; i++) {
-	        String s = input.get(i);
-	        Matcher m = p.matcher(s);
-	        if (!m.find()) break;
-	        rules.add(new String[] {m.group(1), m.group(2)});
-	    }
-        rules.sort(Comparator.comparing(s -> -s[1].length()));
-	    String start = input.get(i+1);
 	    shrink(start, 1);
         System.err.println(min);
 	}
@@ -57,7 +71,7 @@ public class Day19 {
 			try {
 				long P = 0;
 				for (;;) {
-					System.out.println(String.format("%.3e (%d)", (double)N, N-P));
+					System.out.println(String.format("%.3e (+%d)", (double)N, N-P));
 					P = N;
 					Thread.sleep(1000);
 				}

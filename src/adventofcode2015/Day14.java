@@ -1,26 +1,24 @@
 
 package adventofcode2015;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2015/day/14
+ */
 public class Day14 {
 
     public static void main(String[] args) {
-        Pattern p = Pattern.compile("(\\d+).*?(\\d+).*?(\\d+)");
-        List<String> input = new Input(2015, "input14.txt").strings();
-        List<int[]> stats = new ArrayList<>();
-        for (String ss : input) {
-            Matcher m = p.matcher(ss);
-            m.find();
-            stats.add(IntStream.range(0, 3)
-                    .map(i -> Integer.parseInt(m.group(i+1))).toArray());
-        }
+        List<int[]> stats = new Input(2015, 14)
+                .match("(\\d+).*?(\\d+).*?(\\d+)")
+                .map(m -> IntStream.range(1, 4)
+                        .map(i -> Integer.parseInt(m.group(i)))
+                        .toArray())
+                .collect(Collectors.toList());
         int n = stats.size();
         int d[] = new int[n];
         int scores[] = new int[n];
@@ -32,10 +30,11 @@ public class Day14 {
             }
             int max = IntStream.of(d).max().getAsInt();
             IntStream.range(0, n)
-                .filter(x -> d[x] == max)
-                .forEach(x -> scores[x]++);
+                    .filter(x -> d[x] == max)
+                    .forEach(x -> scores[x]++);
         }
-        System.out.println(IntStream.of(scores).max().getAsInt());
+        System.err.println(IntStream.of(d).max().getAsInt());
+        System.err.println(IntStream.of(scores).max().getAsInt());
     }
 
 }

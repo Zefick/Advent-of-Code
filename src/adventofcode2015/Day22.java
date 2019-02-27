@@ -1,6 +1,8 @@
 package adventofcode2015;
 
-
+/**
+ * https://adventofcode.com/2015/day/22
+ */
 public class Day22 {
 
 	static class GameState implements Cloneable {
@@ -48,20 +50,19 @@ public class Day22 {
 		abstract void effect(GameState s);
 	}
 
-	static Integer turn(GameState s, int mana, boolean player) {
-		if (player) s.hp1 -= 1;
-		if (s.hp1 <= 0) {
-			return null;
-		}
-		if (s.hp2 <= 0) {
-			return mana;
+	static Integer turn(GameState s, int mana, boolean player, boolean hard) {
+		if (player && hard) {
+			s.hp1 -= 1;
+			if (s.hp1 <= 0) {
+				return null;
+			}
 		}
 		if (s.poison > 0) {
 			s.hp2 -= 3;
-			if (s.hp2 <= 0) {
-				return mana;
-			}
 			--s.poison;
+		}
+		if (s.hp2 <= 0) {
+			return mana;
 		}
 		if (s.recharge > 0) {
 			s.mana += 101;
@@ -73,7 +74,7 @@ public class Day22 {
 			if (s.hp1 <= 0) {
 				return null;
 			}
-			return turn(s, mana, true);
+			return turn(s, mana, true, hard);
 		} else {
 			Integer min = null;
 			for (Spell spell : Spell.values()) {
@@ -81,9 +82,9 @@ public class Day22 {
 					GameState s2 = s.clone();
 					s2.mana -= spell.cost;
 					spell.effect(s2);
-					Integer n = turn(s2, mana+spell.cost, false);
-					if (n != null) {
-						min = min == null ? n : Math.min(min, n);
+					Integer n = turn(s2, mana+spell.cost, false, hard);
+					if (n != null && (min == null || n < min)) {
+						min = n;
 					}
 				}
 			}
@@ -93,8 +94,7 @@ public class Day22 {
 
 	public static void main(String[] args) throws Exception {
 	    GameState state = new GameState();
-	    Integer best = turn(state, 0, true);
-	    System.out.println(best);
+		System.err.println(turn(state, 0, true, false));
+		System.err.println(turn(state, 0, true, true));
 	}
-
 }

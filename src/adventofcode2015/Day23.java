@@ -2,39 +2,40 @@ package adventofcode2015;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 import utils.Input;
 
+/**
+ * https://adventofcode.com/2015/day/23
+ */
 public class Day23 {
 
-    static int reg[]= {1, 0};
     static List<String[]> commands = new ArrayList<>();
 
 	public static void main(String[] args) throws IOException {
-        //                          1      2              3  4
-        Pattern p = Pattern.compile("(\\w+) ([ab]|[-+0-9]+)(, ([-+0-9]+))?");
-
-        new Input(2015, "input23.txt").strings().stream()
-                .map(p::matcher)
-                .filter(Matcher::find)
-                .map(m -> IntStream.range(0, m.groupCount()+1)
+        new Input(2015, 23)
+                .match("(\\w+) ([ab]|[-+0-9]+)(, ([-+0-9]+))?")
+                .map(m -> IntStream.range(0, m.groupCount() + 1)
                         .mapToObj(m::group)
                         .toArray(String[]::new))
                 .forEach(commands::add);
-
+        
+        int reg[]= {0, 0};
 		for (int n=0; n>=0 && n<commands.size();) {
-		    n = runCmd(n);
+		    n = runCmd(n, reg);
 		}
-		System.out.println(Arrays.toString(reg));
+        System.err.println(reg[1]);
+
+        reg = new int[] {1, 0};
+		for (int n=0; n>=0 && n<commands.size();) {
+		    n = runCmd(n, reg);
+		}
+		System.err.println(reg[1]);
 	}
 
-	static int runCmd(final int n) {
-		System.out.println(Arrays.toString(reg));
+	static int runCmd(final int n, int reg[]) {
 		String ss[] = commands.get(n);
 		String cmd = ss[1];
 		int r = ss[2].equals("a") ? 0 : 1;
