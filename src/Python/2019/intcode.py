@@ -1,10 +1,16 @@
 
 class Intcode:
 
-    def __init__(self, ram):
+    def __init__(self, ram: list, input = None):
+        if isinstance(ram, str):
+            ram = list(map(int, ram.split(",")))
         self.ram = list(ram) + [0] * 10000
+        self.input = input if input else []
 
-    def run(self, input):
+    def put_input(self, x):
+        self.input.append(x)
+
+    def run(self):
         ram = self.ram
         ptr = 0
         shifts = {1:4, 2:4, 3:2, 4:2, 7:4, 8:4, 9:2}
@@ -39,9 +45,9 @@ class Intcode:
             elif op == 2:
                 ram[c] = ram[a] * ram[b]
             elif op == 3:
-                while dataPtr >= len(input):
+                while dataPtr >= len(self.input):
                     yield "wait"
-                ram[a] = input[dataPtr]
+                ram[a] = self.input[dataPtr]
                 dataPtr += 1
             elif op == 4:
                 yield ram[a]

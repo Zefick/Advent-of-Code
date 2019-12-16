@@ -12,7 +12,7 @@ results = []
 for p in list(itertools.permutations(range(5))):
     output = 0
     for x in p:
-        output = next(Intcode(input).run([x, output]))
+        output = next(Intcode(input, [x, output]).run())
     results.append(output)
 printResult(1, max(results))
 
@@ -20,7 +20,7 @@ printResult(1, max(results))
 results = []
 for p in list(itertools.permutations(range(5, 10))):
     queues = [[p[0], 0], [p[1]], [p[2]], [p[3]], [p[4]]]
-    amps = list(Intcode(input).run(queues[i]) for i in range(5))
+    amps = list(Intcode(input, queues[i]).run() for i in range(5))
     i = 0
     while True:
         x = next(amps[i], None)
