@@ -2,7 +2,7 @@
 class Input:
 
     def __init__(self, year, day) :
-        self.file = "../../../input/%d/input%02d.txt" % (year, day)
+        self.file = "input/%d/input%02d.txt" % (year, day)
 
     def lines(self) -> list :
         f = open(self.file, "r")
