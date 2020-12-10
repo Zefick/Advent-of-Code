@@ -19,7 +19,7 @@ def check(fields) :
     val = int(fields['eyr'])
     if val < 2020 or val > 2030:
         return False
-    m = re.match('(\d+)(cm|in)$', fields['hgt'])
+    m = re.match('(\\d+)(cm|in)$', fields['hgt'])
     if m:
         h = int(m[1])
         if not ((m[2] == 'cm' and h >= 150 and h <= 193) or
@@ -29,7 +29,7 @@ def check(fields) :
         return False
     return re.match("#[a-f0-9]{6}$", fields['hcl']) \
         and fields['ecl'] in ecls \
-        and re.match("\d{9}$", fields['pid'])
+        and re.match("\\d{9}$", fields['pid'])
 
 part1, part2 = 0, 0
 fields = {}
