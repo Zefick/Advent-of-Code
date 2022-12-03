@@ -28,6 +28,7 @@ public class Day25 {
                 if (g.stream().anyMatch(s -> Math.abs(star[0] - s[0]) + Math.abs(star[1] - s[1])
                             + Math.abs(star[2] - s[2]) + Math.abs(star[3] - s[3]) <= 3)) {
                     if (group == null) {
+                        g.add(star);
                         group = g;
                     } else {
                         group.addAll(g);
@@ -37,8 +38,6 @@ public class Day25 {
             }
             if (group == null) {
                 groups.add(new ArrayList<>(Collections.singleton(star)));
-            } else {
-                group.add(star);
             }
         }
         System.err.println(groups.stream().filter(c -> !c.isEmpty()).count());

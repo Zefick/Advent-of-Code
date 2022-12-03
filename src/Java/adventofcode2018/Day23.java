@@ -29,9 +29,7 @@ public class Day23 {
         public int compareTo(Region reg) {
             if (bots != reg.bots) return bots - reg.bots;
             if (r != reg.r) return reg.r - r;
-            if (x + y + z > reg.x + reg.y + reg.z) return 1;
-            if (x + y + z < reg.x + reg.y + reg.z) return -1;
-            return hashCode() - reg.hashCode();
+            return x + y + z - reg.x + reg.y + reg.z;
         }
     }
 

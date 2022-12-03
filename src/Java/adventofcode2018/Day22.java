@@ -2,8 +2,10 @@ package adventofcode2018;
 
 import java.awt.Point;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,18 +36,17 @@ public class Day22 {
         return level;
     }
 
-    static Map<Point, Integer> distances0 = new HashMap<>();
-    static Map<Point, Integer> distances1 = new HashMap<>();
-    static Map<Point, Integer> distances2 = new HashMap<>();
+    static List<Map<Point, Integer>> distances = new ArrayList<>();
+    static {
+    	distances.add(new HashMap<>());
+    	distances.add(new HashMap<>());
+    	distances.add(new HashMap<>());
+    }
     static int getDistance(Point p, int tool) {
-        if (tool == 0) return distances0.getOrDefault(p, Integer.MAX_VALUE);
-        else if (tool == 1) return distances1.getOrDefault(p, Integer.MAX_VALUE);
-        else return distances2.getOrDefault(p, Integer.MAX_VALUE);
+        return distances.get(tool).getOrDefault(p, Integer.MAX_VALUE);
     }
     static void putDistance(Point p, int tool, int d) {
-        if (tool == 0) distances0.put(p, d);
-        else if (tool == 1) distances1.put(p, d);
-        else if (tool == 2) distances2.put(p, d);
+        distances.get(tool).put(p, d);
     }
 
     public static void main(String[] args) throws Exception {
@@ -80,11 +81,6 @@ public class Day22 {
             }
             if (getDistance(p, tool) < time || getDistance(new Point(tx, ty), 1) <= time)
                 continue;
-            int tool2 = 3 - (tool + getLevel(p) % 3);
-            if (getDistance(p, tool2) > time + 7) {
-                putDistance(p, tool2, time + 7);
-                queue.add(new int[] {p.x, p.y, tool2, time + 7});
-            }
             for (int dir[] : dirs) {
                 Point p2 = new Point(p.x + dir[0], p.y + dir[1]);
                 if (p2.x < 0 || p2.y < 0 || p2.x > 100 || getLevel(p2) % 3 == tool) {
@@ -94,6 +90,11 @@ public class Day22 {
                     putDistance(p2, tool, time + 1);
                     queue.add(new int[] {p2.x, p2.y, tool, time + 1});
                 }
+            }
+            int tool2 = 3 - (tool + getLevel(p) % 3);
+            if (getDistance(p, tool2) > time + 7) {
+                putDistance(p, tool2, time + 7);
+                queue.add(new int[] {p.x, p.y, tool2, time + 7});
             }
         }
         System.err.println(getDistance(new Point(tx, ty), 1));

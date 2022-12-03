@@ -77,7 +77,7 @@ public class Day24 {
                                         && g.faction == !g2.faction
                                         && !g2.immune.contains(g.attack))
                                 .max(Comparator.<Group, Integer>comparing(g2 -> 
-                                            (g2.weak.contains(g.attack) ? (g.units * g.power * 2) : (g.units * g.power)))
+                                            g.units * g.power * (g2.weak.contains(g.attack) ? 2 : 1))
                                         .thenComparing(g2 -> g2.units * g2.power)
                                         .thenComparing(g2 -> g2.initiative))
                                 .ifPresent(g2 -> targets.put(g, g2))
@@ -89,9 +89,7 @@ public class Day24 {
                         .forEach(g -> {
                             if (g.units <= 0) return;
                             Group g2 = targets.get(g);
-                            int damage = g2.weak.contains(g.attack)
-                                    ? (g.units * g.power * 2)
-                                    : (g.units * g.power);
+                            int damage = g.units * g.power * (g2.weak.contains(g.attack) ? 2 : 1);
                             g2.units -= damage / g2.hp;
                         });
 
