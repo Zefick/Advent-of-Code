@@ -11,7 +11,7 @@ class Input:
     def match(self, pattern: str) :
         import re
         pattern = re.compile(pattern)
-        return map(lambda line: pattern.match(line), self.lines())
+        return (pattern.match(line) for line in self.lines())
 
 def printResult(part, result, time=None):
     print(f"Part {part}: {result}" \

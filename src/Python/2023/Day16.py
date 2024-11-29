@@ -3,19 +3,19 @@ from utils import Input, printResult
 
 # https://adventofcode.com/2023/day/16
 
-input = list(map(list, Input(2023, 16).lines()))
+input = Input(2023, 16).lines()
 
 h, w = len(input), len(input[0])
 
 def bean(x, y, dx, dy):
-    d = set()
+    seen = set()
     energized = set()
     q = [(x, y, dx, dy)]
     while q:
         x, y, dx, dy = q.pop()
-        if (x, y, dx, dy) in d:
+        if (x, y, dx, dy) in seen:
             continue
-        d.add((x, y, dx, dy))
+        seen.add((x, y, dx, dy))
         energized.add((x, y))
         x += dx
         y += dy
