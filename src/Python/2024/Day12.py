@@ -1,6 +1,5 @@
 
 from utils import Input, printResult
-from collections import defaultdict
 from itertools import product
 
 # https://adventofcode.com/2024/day/12
